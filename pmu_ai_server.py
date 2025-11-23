@@ -9,7 +9,7 @@ import shutil
 import os
 import uuid
 
-from pmu_model import infer_pills
+from pmu_model import infer_pill_image_multi_top1 as infer_pills
 
 app = FastAPI(
     title="PillMeUp AI Server",
