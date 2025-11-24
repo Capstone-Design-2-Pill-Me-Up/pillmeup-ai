@@ -19,7 +19,7 @@ from PIL import Image
 # -------------------------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-BEST_YOLO      = os.path.join(BASE_DIR, "best (2).pt")
+BEST_YOLO      = os.path.join(BASE_DIR, "best.pt")
 RESNET_1324_PT = os.path.join(BASE_DIR, "best_model_generalized_fin.pth")
 
 CLASS_JSON_1K  = os.path.join(BASE_DIR, "pill_label_path_sharp_score.json")
