@@ -52,6 +52,28 @@ async def predict(file: UploadFile = File(...)):
     with open(temp_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
+
+    # --- YOLO 디버깅용 ---
+    from pmu_model import detect_yolo_boxes, square_crop_from_bbox
+    img, boxes, confs = detect_yolo_boxes(temp_path)
+    print("========== YOLO DEBUG ==========")
+    print("Image:", temp_path)
+    print("YOLO boxes:", boxes)
+    print("YOLO confs:", confs)
+
+    if boxes:
+        print("CROPS:")
+        for i, b in enumerate(boxes):
+            sq = square_crop_from_bbox(img, b)
+            if sq is None:
+                print(f" - box[{i}] -> crop FAILED")
+            else:
+                print(f" - box[{i}] -> crop OK, size={sq.size}")
+    else:
+        print("NO YOLO BOXES -> fallback to full image")
+    print("================================")
+
+
     # AI 모델 예측
     result = infer_pills(temp_path, max_pills=4)
 
